@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-i(spoy10m1if3p1!s&a_imz-rvhr!r8z4dcy$1^f+gs^i^t!9@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", default=True)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -83,10 +83,10 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "ENGINE": os.environ.get("SQL_ENGINE"),
+        "NAME": os.environ.get("POSTGRES_DB"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }
