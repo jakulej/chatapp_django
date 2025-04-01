@@ -10,5 +10,5 @@ class Message(models.Model):
         return f'{self.sender}: {self.content}'
 
 class Room(models.Model):
-    is_group = models.BooleanField
-    users = models.ManyToManyField("self")   
+    users = models.ManyToManyField(User)   
+    messages = models.ManyToManyField(Message)
