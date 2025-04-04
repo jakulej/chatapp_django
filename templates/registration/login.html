@@ -7,11 +7,8 @@
 </head>
 <body>
     <form id="loginForm">
-        <label for="login">Login: </label><br/>
-        <input type="text" name="login" id="login"/><br/>
-
-        <label for="password">Password: </label><br/>
-        <input type="password" name="password" id="password"/><br/>
+        {% csrf_token %}
+        {{ form }}
 
         <button id="loginButton">Login</button>
     </form>
