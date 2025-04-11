@@ -3,5 +3,6 @@ from chat import views as chat_views
 from . import views
 
 urlpatterns = [
-    path('', chat_views.chatPage, name='chat-page')
+    path("", views.index, name="index"),
+    path("<str:room_name>/", views.room, name="room"),
 ]
