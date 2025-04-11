@@ -14,6 +14,13 @@
     <form id="logout-form" method="post" action="http://127.0.0.1:8000/accounts/logout/">{% csrf_token %}
         <button id="logout-button">Logout</button>
     </form>
+    <div>
+        {% for room in request.user.rooms.all %}
+            <div> {{ room.name }} </div>
+        {% endfor %}
+    </div>
+
+    </ul>
     <script>
         document.querySelector('#room-name-input').focus();
         document.querySelector('#room-name-input').onkeyup = function(e) {
