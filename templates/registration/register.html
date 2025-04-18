@@ -1,0 +1,16 @@
+<!-- chat/templates/registration/register.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Register</title>
+</head>
+<body>
+    <form id="registerForm" method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        <button id="registerButton">Login</button>
+    </form>
+</body>
+</html>
