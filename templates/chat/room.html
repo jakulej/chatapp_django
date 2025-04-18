@@ -6,24 +6,42 @@
     <title>Chat Room</title>
 </head>
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <div id="chat-log">    
+        {% for message in latest_messages %}
+            <div>
+                <h3>{{message.sender}}</h3>
+                <div>{{message.content}}</div>
+            </div>
+        {% endfor %}
+    </div><br>
     <input id="chat-message-input" type="text" size="100"><br>
     <input id="chat-message-submit" type="button" value="Send">
-    {{ room_name|json_script:"room-name" }}
-    <script>
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
+    {{ room_id|json_script:"room-id" }}
+       <script>
+        const roomId = JSON.parse(document.getElementById('room-id').textContent);
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
             + '/ws/chat/'
-            + roomName
+            + roomId
             + '/'
         );
+        function addMessage(author, message){
+            var messageDiv = document.createElement('div');
+            var chatLog = document.getElementById('chat-log');
+            var messageContent = document.createElement('div');
+            var messageAuthor = document.createElement('h3');
 
+            messageContent.textContent = message;
+            messageAuthor.textContent = author;
+            
+            chatLog.appendChild(messageDiv);
+            messageDiv.appendChild(messageAuthor);
+            messageDiv.appendChild(messageContent);
+        }
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
+            addMessage(data.user, data.message)
         };
 
         chatSocket.onclose = function(e) {
@@ -36,12 +54,13 @@
                 document.querySelector('#chat-message-submit').click();
             }
         };
-
+        
+        //Send message
         document.querySelector('#chat-message-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
-                'message': message
+                'message': message,
             }));
             messageInputDom.value = '';
         };
