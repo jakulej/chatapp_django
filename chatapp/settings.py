@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'chat',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "/chat/"
 LOGOUT_REDIRECT_URL ="/accounts/login"
+
+AUTH_USER_MODEL="accounts.User"
