@@ -1,0 +1,12 @@
+<div id="modal-add-friend-content">
+    <h3>Add Friend</h3>
+    <form id="form-find-friend">
+        <input id="input-find-friend" type="search"></input>
+        <button id="button-find-friend">Search</button> 
+    </form>
+    <div id="results-find-friend">
+    {% for friend in friends_results %}
+        {% include "chat/add-friend-record.html" with username=friend.username}
+    {% endfor %}
+    </div>
+</div>
