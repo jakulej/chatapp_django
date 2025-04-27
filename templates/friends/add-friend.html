@@ -6,7 +6,7 @@
     </div>
     <div id="results-find-friend">
     {% for friend in friends_results %}
-        {% include "chat/add-friend-record.html" with username=friend.username}
+        {% include "friends/add-friend-record.html" with username=friend.username %}
     {% endfor %}
     </div>
 </div>
@@ -28,10 +28,6 @@
                 const html = await response.text();
                 modalAddFriend.innerHTML = html;
             }
-
-
-
-
 
         } catch (error) {
             console.error(error.message);
