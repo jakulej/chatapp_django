@@ -1,12 +1,42 @@
 <div id="modal-add-friend-content">
     <h3>Add Friend</h3>
-    <form id="form-find-friend">
+    <div id="find-friend">
         <input id="input-find-friend" type="search"></input>
         <button id="button-find-friend">Search</button> 
-    </form>
+    </div>
     <div id="results-find-friend">
     {% for friend in friends_results %}
         {% include "chat/add-friend-record.html" with username=friend.username}
     {% endfor %}
     </div>
 </div>
+<script>
+
+    document.getElementById("button-find-friend").onclick = async function(e) {
+        const query = document.getElementById("input-find-friend").value;
+        const requestUrl = "/friends/find/" + query;
+        const modalAddFriend = document.getElementById("modal-add-friend");
+        
+
+        try {
+            const response = await fetch(requestUrl);
+
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+            else {
+                const html = await response.text();
+                modalAddFriend.innerHTML = html;
+            }
+
+
+
+
+
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+
+</script>
