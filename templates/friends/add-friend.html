@@ -1,6 +1,7 @@
 <div id="modal-add-friend-content">
     <h3>Add Friend</h3>
     <div id="find-friend">
+        {% csrf_token %}
         <input id="input-find-friend" type="search"></input>
         <button id="button-find-friend">Search</button> 
     </div>
@@ -36,13 +37,19 @@
     
 
     function addEvent() {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         document
             .querySelectorAll('.button-add-friend-record')
             .forEach(function(button) {
                 button.addEventListener('click', async function(event) {
                     const requestUrl = '/friends/add/' + event.target.dataset.username;
                     try {
-                        const response = await fetch(requestUrl, {method: "POST"});
+                        const response = await fetch(
+                            requestUrl, 
+                            {
+                                method: "POST",
+                                headers: {'X-CSRFToken': csrftoken}
+                            });
                         
                         if (!response.ok) {
                             throw new Error(`Response status: ${response.status}`);
