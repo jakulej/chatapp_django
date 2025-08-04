@@ -13,6 +13,7 @@ def find_friend(request, query):
     print(result)
     return render(request, "friends/add-friend.html",{"friends_results":result})
 
+@login_required
 def add_friend(request, username):
     if request.method == 'POST':
         User = get_user_model()
