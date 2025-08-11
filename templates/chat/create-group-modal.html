@@ -1,0 +1,20 @@
+<div id="modal-create-group">
+    <h3>Create Group</h3>
+    <div id="modal-create-group-user-friends">
+    {% for friend in request.user.friends.all %}
+        {% include "chat/create-group-modal-record.html" with username=friend.username %}
+    {% endfor %}
+    </div>
+    <button class="modal-create-group-button-submit" data-username="{{ username }}">Create Group</button>
+</div>
+<script>
+    function addEvent() {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        document.getElementById('modal-create-group-button-submit').addEventListener('click' , async function(e) {
+            document.querySelector
+        
+        }
+    }
+
+
+</script>
