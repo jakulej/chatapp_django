@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect
 from .models import Message, Room
 from django.contrib.auth.decorators import login_required
-from .room_managment import create_room
+from .room_managment import create_room_obj
 from django.http import HttpResponse
+from django.contrib.auth import get_user_model
+import json
 # Create your views here.
 @login_required
 def index(request):
@@ -17,7 +19,13 @@ def room(request, room_id):
 @login_required
 def create_room(request):
     if request.method == 'POST':
-        user = request.user
-        print(request.body.users)
+        User = get_user_model()
+        room_creator = request.user
+        users = json.loads(request.body.decode('utf-8'))['users']
+        users = list(map(lambda user: User.objects.get(username=user), users))
+        users.append(room_creator)
+        
+        create_room_obj(users,"Group")
+        print(users)
     return HttpResponse(status=200)
     
