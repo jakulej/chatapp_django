@@ -7,9 +7,12 @@
 </head>
 <body>
     <h2> Hi {{ user.username }}</h2>
-    <form id="logout-form" method="post" action="http://127.0.0.1:8000/accounts/logout/">{% csrf_token %}
+    <form id="logout-form" method="post" action="{% url 'logout' %}">{% csrf_token %}
         <button id="logout-button">Logout</button>
     </form><br/>
+
+    <button id='add-friend-button'>Add Friend</button>
+    <button id='create-group-button'>Create Group</button></br>
     What chat room would you like to enter?<br>
 
     <div>
@@ -18,6 +21,9 @@
                 <div class="room" data-room-id='{{room.id}}'>{{ room.name }}</div>
             </div>
         {% endfor %}
+    </div>
+    <div id="modal-add-friend">
+        {% include "friends/add-friend.html" %}
     </div>
     <script>
         document.querySelectorAll('.room').forEach(roomDiv => {
@@ -28,5 +34,8 @@
         });
         
     </script>
+    <div id="modal-create-group">
+        {% include "chat/create-group-modal.html" %}
+    </div>
 </body>
 </html>

@@ -1,0 +1,66 @@
+<div id="modal-add-friend-content">
+    <h3>Add Friend</h3>
+    <div id="find-friend">
+        {% csrf_token %}
+        <input id="input-find-friend" type="search"></input>
+        <button id="button-find-friend">Search</button> 
+    </div>
+    <div id="results-find-friend">
+    {% for friend in friends_results %}
+        {% include "friends/add-friend-record.html" with username=friend.username %}
+    {% endfor %}
+    </div>
+</div>
+<script>
+    document.getElementById("button-find-friend").addEventListener('click' , async function(e) {
+        const query = document.getElementById("input-find-friend").value;
+        const requestUrl = "/friends/find/" + query;
+        const modalAddFriend = document.getElementById("modal-add-friend");
+        
+        try {
+            const response = await fetch(requestUrl);
+
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+            else {
+                const html = await response.text();
+                modalAddFriend.innerHTML = html;
+                addEvent();
+            }
+
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+    );
+    
+
+    function addEvent() {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        document
+            .querySelectorAll('.button-add-friend-record')
+            .forEach(function(button) {
+                button.addEventListener('click', async function(event) {
+                    const requestUrl = '/friends/add/' + event.target.dataset.username;
+                    try {
+                        const response = await fetch(
+                            requestUrl, 
+                            {
+                                method: "POST",
+                                headers: {'X-CSRFToken': csrftoken}
+                            });
+                        
+                        if (!response.ok) {
+                            throw new Error(`Response status: ${response.status}`);
+                        }
+                    }catch (error) {
+                        console.error(error.message);
+                    }
+                    window.location.href = '/chat/';
+                });
+        });
+    }
+
+
+</script>
