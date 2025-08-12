@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from chat.room_managment import create_room
+from chat.room_managment import create_room_obj
 # Create your views here.
 @login_required
 def find_friend(request, query):
@@ -22,6 +22,6 @@ def add_friend(request, username):
 
         user.friends.add(friend)
         user.save()
-        create_room([user, friend],"temp")
+        create_room_obj([user, friend],"temp")
 
     return redirect("/chat/index/")
