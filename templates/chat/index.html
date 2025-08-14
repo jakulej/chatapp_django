@@ -6,6 +6,13 @@
     <title>Chat Rooms</title>
 </head>
 <body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <h2> Hi {{ user.username }}</h2>
     <form id="logout-form" method="post" action="{% url 'logout' %}">{% csrf_token %}
         <button id="logout-button">Logout</button>
