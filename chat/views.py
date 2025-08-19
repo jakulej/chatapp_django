@@ -7,8 +7,10 @@ from django.contrib.auth import get_user_model
 import json
 # Create your views here.
 @login_required
-def index(request):
-    return render(request, "chat/index.html")
+def index(request, room_id):
+    room = Room.objects.get(id=room_id)
+    latest_messages = room.messages.order_by("timestamp")[:10]
+    return render(request, "chat/index.html", {"room_id": room_id, "latest_messages": latest_messages})
 
 @login_required
 def room(request, room_id):

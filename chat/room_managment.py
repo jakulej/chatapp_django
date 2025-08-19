@@ -10,4 +10,5 @@ def create_room_obj(users, room_name = None):
     room.users.set(users)
     pass
 
-
+def get_latest_room(user):
+    pass
