@@ -1,0 +1,11 @@
+<div id="user-banner">
+    <h2 class="text-2xl/7 font-bold text-gray-900">{{ user.username }}</h2>
+    <div id="button-group">
+        <form id="logout-form" method="post" action="{% url 'logout' %}">{% csrf_token %}
+            <button id="logout-button">{% include "chat/icons/logout-icon.html" %}</button>
+        </form>
+
+        <button id="add-friend">{% include "chat/icons/add-friend-icon.html" %}</button>
+        <button id="create-group">{% include "chat/icons/add-group-icon.html" %}  </button>
+    </div>
+</div>

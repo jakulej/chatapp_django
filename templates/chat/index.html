@@ -17,13 +17,7 @@
     {% endif %}
 <div class="flex flex-row w-full flex-nowrap">
     <div id="chat-selection" class="w-1/5">
-        <h2 class="text-2xl/7 font-bold text-gray-900"> Hi {{ user.username }}</h2>
-        <form id="logout-form" method="post" action="{% url 'logout' %}">{% csrf_token %}
-            <button id="logout-button">{% include "chat/icons/logout-icon.html" %}</button>
-        </form><br/>
-
-        <button id="add-friend">{% include "chat/icons/add-friend-icon.html" %}</button>
-        <button id="create-group">{% include "chat/icons/add-group-icon.html" %}  </button>
+        {% include "chat/user-banner.html" %}
         <div id="chats-heading-box"><h3 id="chats-heading-text">Chats</h3></div>
 
         <div>
@@ -44,7 +38,6 @@
                 window.location.pathname = '/chat/' + roomId + '/';
                 });
             });
-            
         </script>
         <div id="modal-create-group">
             {% include "chat/create-group-modal.html" %}
