@@ -16,7 +16,7 @@
         </ul>
     {% endif %}
 <div class="flex flex-row w-full flex-nowrap">
-    <div id="chat-selection" class="w-1/5">
+    <div id="chat-selection" class="basis-300 bg-[#004643] text-[#abd1c6]">
         {% include "chat/user-banner.html" %}
         <div id="chats-heading-box"><h3 id="chats-heading-text">Chats</h3></div>
 
@@ -43,7 +43,7 @@
             {% include "chat/create-group-modal.html" %}
         </div>
     </div>
-    <div id="chatroom" class="w-4/5">
+    <div id="chatroom" class="basis-auto bg-[#abd1c6]">
         {% include "chat/room.html" %}
     </div>
 </div>
