@@ -1,13 +1,13 @@
 <!-- chat/templates/chat/index.html -->
 <!DOCTYPE html>
-<html>
+<html class="h-full">
 <head>
     <meta charset="utf-8"/>
     <title>Chat Rooms</title>
     {% load static %}
     <link href="{% static "chat/css/output.css" %}" rel="stylesheet">
 </head>
-<body>
+<body class="h-full">
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -15,15 +15,16 @@
             {% endfor %}
         </ul>
     {% endif %}
-<div class="flex flex-row w-full flex-nowrap">
-    <div id="chat-selection" class="basis-300 bg-[#004643] text-[#abd1c6]">
+<div class="flex flex-row w-full h-full">
+    <div id="chat-selection" class="w-[370px] min-w-0 flex-none bg-[#abd1c6] text-[#0f3433]">
         {% include "chat/user-banner.html" %}
         <div id="chats-heading-box"><h3 id="chats-heading-text">Chats</h3></div>
 
         <div>
             {% for room in request.user.rooms.all %}
-                <div> 
-                    <div class="room" data-room-id='{{room.id}}'>{{ room.name }}</div>
+                <div class="room pl-2" data-room-id='{{room.id}}'>
+                    <h3 class="text-[#001e1d] text-[18px] font-bold"> {{ room.name }}</h3>
+                    <div> Lorem Ipsuum </div>
                 </div>
             {% endfor %}
         </div>
@@ -43,7 +44,7 @@
             {% include "chat/create-group-modal.html" %}
         </div>
     </div>
-    <div id="chatroom" class="basis-auto bg-[#abd1c6]">
+    <div id="chatroom" class="flex-auto bg-[#004643]">
         {% include "chat/room.html" %}
     </div>
 </div>
