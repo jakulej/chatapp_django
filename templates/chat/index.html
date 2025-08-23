@@ -19,9 +19,9 @@
     <div id="chat-selection" class="w-[370px] min-w-0 flex-none bg-[#abd1c6] text-[#0f3433] p-1.5">
         {% include "chat/user-banner.html" %}
         <div id="chats-heading-box"><h3 id="chats-heading-text">Chats</h3></div>
-        <div>
+        <div id="room-list" class="space-y-2">
             {% for room in request.user.rooms.all %}
-                <div class="room pl-2" data-room-id='{{room.id}}'>
+                <div class="room pl-2 hover:bg-[#f9bc60] hover:text-black cursor-pointer" data-room-id='{{room.id}}'>
                     <h3 class="text-[#001e1d] text-[18px] font-bold"> {{ room.name }}</h3>
                     <div> Lorem Ipsuum </div>
                 </div>
