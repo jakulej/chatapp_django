@@ -1,13 +1,18 @@
-<div id="chat-log" class="bg-[#004643]">    
+<div id="chat-log" class="bg-[#004643] flex-grow overflow-y-auto">    
     {% for message in latest_messages %}
         <div>
-            <h3>{{message.sender}}</h3>
-            <div>{{message.content}}</div>
+            <h3 class="text-[#fffffe] font-bold text-[16px]">{{message.sender}}</h3>
+            <div class="text-[#abd1c6]">{{message.content}}</div>
         </div>
     {% endfor %}
-</div><br>
-<input id="chat-message-input" type="text" size="100"><br>
-<input id="chat-message-submit" type="button" value="Send">
+</div>
+
+<div class="p-2 flex gap-2">
+    <input id="chat-message-input" type="text" class="flex-grow p-2 bg-[#abd1c6] rounded" placeholder="Type a message...">
+    <button id="chat-message-submit" class="px-4 py-2 bg-[#f9bc60] text-[#001e1d] rounded">
+        {% include "chat/icons/send-icon.html" %}
+    </button>
+</div>
 {{ room_id|json_script:"room-id" }}
    <script>
     const roomId = JSON.parse(document.getElementById('room-id').textContent);

@@ -16,10 +16,9 @@
         </ul>
     {% endif %}
 <div class="flex flex-row w-full h-full">
-    <div id="chat-selection" class="w-[370px] min-w-0 flex-none bg-[#abd1c6] text-[#0f3433]">
+    <div id="chat-selection" class="w-[370px] min-w-0 flex-none bg-[#abd1c6] text-[#0f3433] p-0.5">
         {% include "chat/user-banner.html" %}
         <div id="chats-heading-box"><h3 id="chats-heading-text">Chats</h3></div>
-
         <div>
             {% for room in request.user.rooms.all %}
                 <div class="room pl-2" data-room-id='{{room.id}}'>
@@ -44,7 +43,7 @@
             {% include "chat/create-group-modal.html" %}
         </div>
     </div>
-    <div id="chatroom" class="flex-auto bg-[#004643]">
+    <div id="chatroom" class="flex-auto bg-[#004643] flex flex-col h-screen">
         {% include "chat/room.html" %}
     </div>
 </div>
