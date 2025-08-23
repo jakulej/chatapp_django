@@ -8,6 +8,7 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace;
     --color-blue-600: oklch(54.6% 0.245 262.881);
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --font-weight-bold: 700;
@@ -165,8 +166,17 @@
   }
 }
 @layer utilities {
+  .fixed {
+    position: fixed;
+  }
   .static {
     position: static;
+  }
+  .inset-0 {
+    inset: calc(var(--spacing) * 0);
+  }
+  .z-50 {
+    z-index: 50;
   }
   .container {
     width: 100%;
@@ -189,21 +199,15 @@
   .flex {
     display: flex;
   }
+  .hidden {
+    display: none;
+  }
   .size-6 {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
   }
-  .h-16 {
-    height: calc(var(--spacing) * 16);
-  }
   .h-17 {
     height: calc(var(--spacing) * 17);
-  }
-  .h-20 {
-    height: calc(var(--spacing) * 20);
-  }
-  .h-40 {
-    height: calc(var(--spacing) * 40);
   }
   .h-full {
     height: 100%;
@@ -250,6 +254,9 @@
   .justify-around {
     justify-content: space-around;
   }
+  .justify-center {
+    justify-content: center;
+  }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
@@ -274,14 +281,8 @@
   .bg-\[\#f9bc60\] {
     background-color: #f9bc60;
   }
-  .bg-blue-600 {
-    background-color: var(--color-blue-600);
-  }
-  .p-0\.5 {
-    padding: calc(var(--spacing) * 0.5);
-  }
-  .p-1 {
-    padding: calc(var(--spacing) * 1);
+  .bg-black {
+    background-color: var(--color-black);
   }
   .p-1\.5 {
     padding: calc(var(--spacing) * 1.5);
@@ -303,9 +304,6 @@
   }
   .pl-2 {
     padding-left: calc(var(--spacing) * 2);
-  }
-  .text-\[15px\] {
-    font-size: 15px;
   }
   .text-\[16px\] {
     font-size: 16px;
@@ -331,9 +329,6 @@
   }
   .text-\[\#fffffe\] {
     color: #fffffe;
-  }
-  .text-white {
-    color: var(--color-white);
   }
 }
 @property --tw-font-weight {
