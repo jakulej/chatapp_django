@@ -15,15 +15,32 @@
             {% endfor %}
         </ul>
     {% endif %}
-<div class="flex flex-row w-full h-full">
-    <div id="chat-selection" class="w-[370px] min-w-0 flex-none bg-[#abd1c6] text-[#0f3433] p-1.5">
-        {% include "chat/user-banner.html" %}
-        <div id="chats-heading-box"><h3 id="chats-heading-text">Chats</h3></div>
-        <div id="room-list" class="space-y-2">
+<div class="flex h-screen bg-[#f8f5f2]">
+    <div id="chat-selection" class="w-80 border-r flex flex-col">
+        <!-- {% include "chat/user-banner.html" %} -->
+        <div class="p-4 border-b">
+            <div class="flex items-center justify-between mb-4">
+                <h3 id="chats-heading-text" class="text-xl font-semibold">Chats</h3>
+
+                <div class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all">{% include "chat/icons/add-friend-icon.html" %}</div>
+            </div>
+        </div>
+        <div id="room-list" class="flex-1 overflow-y-auto">
             {% for room in request.user.rooms.all %}
-                <div class="room pl-2 hover:bg-[#f9bc60] hover:text-black cursor-pointer" data-room-id='{{room.id}}'>
-                    <h3 class="text-[#001e1d] text-[18px] font-bold"> {{ room.name }}</h3>
-                    <div> Lorem Ipsuum </div>
+                <div class="room p-4 border-b cursor-pointer hover:bg-opacity-50 transition-colors bg-opacity-100" data-room-id='{{room.id}}'>
+                    <div class="flex items-center gap-3">
+                        <div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold truncate"> {{ room.name }}</h3>
+                                <span class="text-xs">21:37 </span>
+                            </div>
+                            <div class="flex items-center justify-between mt-1"> 
+                                <p class="text-sm truncate">Lorem Ipsuum</p> 
+                            </div>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         </div>
