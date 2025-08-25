@@ -20,7 +20,7 @@
         {% include "chat/room-list-banner.html" %}
         <div id="room-list" class="flex-1 overflow-y-auto">
             {% for room in request.user.rooms.all %}
-                <div class="room p-4 border-b cursor-pointer hover:bg-opacity-50 transition-colors bg-opacity-100" data-room-id='{{room.id}}'>
+                <div class="room p-4 border-b cursor-pointer hover:bg-opacity-50 transition-colors bg-opacity-100 hover:bg-[#f8f5f2]" data-room-id='{{room.id}}'>
                     <div class="flex items-center gap-3">
                         <div>
                             {% include "chat/icons/user-logo.html" %}
