@@ -10,7 +10,10 @@
             </p>
         </div>
     </div>
-    <div id="room-banner-buttons">
-    {% include "chat/icons/settings-icon.html" %}
+    <div id="room-banner-buttons" class="flex items-center gap-2">
+        {% include "chat/icons/settings-icon.html" %}
+        <button class="flex items-center gap-2 px-3 h-8 rounded-md border text-sm font-medium text-[#F45D48] border-[#F45D48] hover:bg-[#F45D48] hover:text-white hover:cursor-pointer">
+          Logout
+        </button>
     </div>
 </div>

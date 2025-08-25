@@ -427,6 +427,9 @@
   .border-\[\#232323\] {
     border-color: #232323;
   }
+  .border-\[\#F45D48\] {
+    border-color: #F45D48;
+  }
   .bg-\[\#004643\] {
     background-color: #004643;
   }
@@ -535,6 +538,9 @@
   .text-\[\#232323\] {
     color: #232323;
   }
+  .text-\[\#F45D48\] {
+    color: #F45D48;
+  }
   .text-\[\#fffffe\] {
     color: #fffffe;
   }
@@ -626,10 +632,24 @@
       font-weight: var(--font-weight-medium);
     }
   }
+  .hover\:cursor-pointer {
+    &:hover {
+      @media (hover: hover) {
+        cursor: pointer;
+      }
+    }
+  }
   .hover\:bg-\[\#056e6e\] {
     &:hover {
       @media (hover: hover) {
         background-color: #056e6e;
+      }
+    }
+  }
+  .hover\:bg-\[\#F45D48\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #F45D48;
       }
     }
   }
@@ -640,10 +660,27 @@
       }
     }
   }
+  .hover\:text-white {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-white);
+      }
+    }
+  }
   .hover\:opacity-90 {
     &:hover {
       @media (hover: hover) {
         opacity: 90%;
+      }
+    }
+  }
+  .hover\:text-shadow-white {
+    &:hover {
+      @media (hover: hover) {
+        --tw-text-shadow-color: #fff;
+        @supports (color: color-mix(in lab, red, red)) {
+          --tw-text-shadow-color: color-mix(in oklab, var(--color-white) var(--tw-text-shadow-alpha), transparent);
+        }
       }
     }
   }
@@ -814,6 +851,15 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
+@property --tw-text-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-text-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -843,6 +889,8 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-text-shadow-color: initial;
+      --tw-text-shadow-alpha: 100%;
     }
   }
 }
