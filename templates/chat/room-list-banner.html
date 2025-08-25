@@ -1,0 +1,27 @@
+
+<div class="p-4 border-b border-[#232323]">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-semibold text-[#232323]">Chats</h2>
+
+    <div class="flex gap-2">
+      <!-- przycisk dodania znajomego -->
+      <button class="flex items-center justify-center rounded-md h-8 w-8 shadow hover:opacity-90 bg-[#078080]">
+        {% include "chat/icons/add-friend-icon.html"%}
+      </button>
+
+      <!-- przycisk dodania grupy -->
+      <button class="flex items-center justify-center rounded-md h-8 w-8 shadow hover:opacity-90 bg-[#F45D48]">
+        {% include "chat/icons/add-group-icon.html" %}
+      </button>
+    </div>
+  </div>
+
+  <!-- search bar -->
+  <div class="relative">
+    {% include "chat/icons/maginfire-icon.html" %}
+    <input
+      class="h-9 w-full rounded-md px-3 pl-10 py-1 border shadow outline-none bg-[#f8f5f2] border-[#232323] text-[#222525]"
+      placeholder="Search chats..." />
+  </div>
+</div>
+

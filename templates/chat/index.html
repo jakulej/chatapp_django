@@ -17,14 +17,7 @@
     {% endif %}
 <div class="flex h-screen bg-[#f8f5f2]">
     <div id="chat-selection" class="w-80 border-r flex flex-col bg-[#ffffff]">
-        <!-- {% include "chat/user-banner.html" %} -->
-        <div class="p-4 border-b">
-            <div class="flex items-center justify-between mb-4">
-                <h3 id="chats-heading-text" class="text-xl font-semibold">Chats</h3>
-
-                <div class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all">{% include "chat/icons/add-friend-icon.html" %}</div>
-            </div>
-        </div>
+        {% include "chat/room-list-banner.html" %}
         <div id="room-list" class="flex-1 overflow-y-auto">
             {% for room in request.user.rooms.all %}
                 <div class="room p-4 border-b cursor-pointer hover:bg-opacity-50 transition-colors bg-opacity-100" data-room-id='{{room.id}}'>
