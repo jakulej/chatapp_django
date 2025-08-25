@@ -16,7 +16,7 @@
         </ul>
     {% endif %}
 <div class="flex h-screen bg-[#f8f5f2]">
-    <div id="chat-selection" class="w-80 border-r flex flex-col">
+    <div id="chat-selection" class="w-80 border-r flex flex-col bg-[#ffffff]">
         <!-- {% include "chat/user-banner.html" %} -->
         <div class="p-4 border-b">
             <div class="flex items-center justify-between mb-4">
@@ -30,6 +30,7 @@
                 <div class="room p-4 border-b cursor-pointer hover:bg-opacity-50 transition-colors bg-opacity-100" data-room-id='{{room.id}}'>
                     <div class="flex items-center gap-3">
                         <div>
+                            {% include "chat/icons/user-logo.html" %}
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center justify-between">

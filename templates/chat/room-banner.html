@@ -1,10 +1,6 @@
-<div id="room-banner" class="flex items-center justify-between p-4 border-b">
+<div id="room-banner" class="flex items-center justify-between p-4 border-b bg-[#ffffff]">
     <div class="flex items-center gap-3">
-        <span data-slot="avatar" class="relative flex size-8 shrink-0 overflow-hidden rounded-full h-10 w-10">
-            <span data-slot="avatar-fallback" class="bg-muted flex size-full items-center justify-center rounded-full font-semibold" style="background-color: rgb(7, 128, 128); color: rgb(35, 35, 35);">
-                JD
-            </span>
-        </span>
+        {% include "chat/icons/user-logo.html" %}
         <div>
             <h1 class="font-semibold text-lg" style="color: rgb(35, 35, 35);">
                 John Doe
