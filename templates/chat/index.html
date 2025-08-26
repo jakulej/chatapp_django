@@ -38,7 +38,11 @@
                 </div>
             {% endfor %}
         </div>
-   
+    </div>
+    <div id="chatroom" class="flex-1 flex flex-col">
+        {% include "chat/room.html" %}
+    </div>
+</div>
         <div id="modal-add-friend">
             {% include "friends/add-friend.html" %}
         </div>
@@ -53,10 +57,5 @@
         <div id="modal-create-group">
             {% include "chat/create-group-modal.html" %}
         </div>
-    </div>
-    <div id="chatroom" class="flex-1 flex flex-col">
-        {% include "chat/room.html" %}
-    </div>
-</div>
 </body>
 </html>
