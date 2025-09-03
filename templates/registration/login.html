@@ -27,6 +27,7 @@
             <div class="px-6">
                 {% load widget_tweaks %}
                 <form id="loginForm" class="space-y-4" method="post">
+                    {% csrf_token %}
                     {% for field in form %}
                         <div class="space-y-2">
                             <label for="{{ field.id_for_label }}"class="flex items-center gap-2 text-sm leading-none font-medium select-none">
