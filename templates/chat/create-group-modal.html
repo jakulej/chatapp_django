@@ -17,7 +17,7 @@
     <div class="p-6 border-b border-[#232323]">
       <div class="flex items-center justify-between mb-4">
         <h3 class="text-lg font-semibold text-[#232323]">Create Group Chat</h3>
-        <button data-slot="button" class="inline-flex items-center justify-center rounded-md size-9 text-sm font-medium text-[#232323] hover:bg-accent hover:text-accent-foreground disabled:opacity-50">
+        <button id="add-group-close-modal" class="inline-flex items-center justify-center rounded-md size-9 text-sm font-medium text-[#232323] hover:bg-accent hover:text-accent-foreground disabled:opacity-50">
             {% include "chat/icons/close-icon.html" %}
         </button>
       </div>
@@ -56,8 +56,9 @@
           class="flex-1 rounded-md bg-[#cccccc] text-[#232323] px-4 py-2 h-9 text-sm font-medium shadow-xs">
           Create Group (0 members)
         </button>
-        <button data-slot="button"
-          class="flex-1 rounded-md border border-[#232323] bg-transparent text-[#232323] px-4 py-2 h-9 text-sm font-medium shadow-xs ho
+        <button  class="flex-1 rounded-md border border-[#232323] bg-transparent text-[#232323] px-4 py-2 h-9 text-sm font-medium shadow-xs">
+        Cancel
+        </button>
 
 
 
