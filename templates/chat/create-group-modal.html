@@ -1,4 +1,4 @@
-<div id="modal-create-group">
+<!-- <div id="modal-create-group" class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center z-50">
     <h3>Create Group</h3>
     <div id="modal-create-group-user-friends">
     {% for friend in request.user.friends.all %}
@@ -6,7 +6,62 @@
     {% endfor %}
     </div>
     <button id="modal-create-group-button-submit" data-username="{{ username }}">Create Group</button>
-</div>
+</div> -->
+
+
+
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-in fade-in duration-200">
+  <div data-slot="card" class="bg-white text-[#232323] flex flex-col gap-6 rounded-xl py-6 shadow-sm w-full max-w-lg border border-[#232323] animate-in zoom-in-95 duration-200">
+    
+    <!-- Header -->
+    <div class="p-6 border-b border-[#232323]">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-[#232323]">Create Group Chat</h3>
+        <button id="add-group-close-modal" class="inline-flex items-center justify-center rounded-md size-9 text-sm font-medium text-[#232323] hover:bg-accent hover:text-accent-foreground disabled:opacity-50">
+            {% include "chat/icons/close-icon.html" %}
+        </button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="text-sm font-medium text-[#232323]">Group Name</label>
+          <input data-slot="input" placeholder="Enter group name" value=""
+            class="mt-1 w-full rounded-md border border-[#232323] bg-[#f8f5f2] px-3 py-1 text-base text-[#222525] shadow-xs focus-visible:ring-2 focus-visible:ring-ring/50 h-9" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Members -->
+    <div class="p-6 max-h-80 overflow-y-auto">
+      <div class="space-y-4">
+        <div>
+          <label class="text-sm font-medium text-[#232323]">Add Members</label>
+          <div class="relative mt-1">
+            {% include "chat/icons/maginfire-icon.html" %}
+            <input data-slot="input" placeholder="Search friends to add" value=""
+              class="pl-10 w-full rounded-md border border-[#232323] bg-[#f8f5f2] px-3 py-1 text-base text-[#222525] shadow-xs h-9" />
+          </div>
+        </div>
+
+        {% include "chat/create-group-modal-record.html" %}
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="p-6 border-t border-[#232323]">
+      <div class="flex gap-2">
+        <button data-slot="button" disabled
+          class="flex-1 rounded-md bg-[#cccccc] text-[#232323] px-4 py-2 h-9 text-sm font-medium shadow-xs">
+          Create Group (0 members)
+        </button>
+        <button  class="flex-1 rounded-md border border-[#232323] bg-transparent text-[#232323] px-4 py-2 h-9 text-sm font-medium shadow-xs">
+        Cancel
+        </button>
+
+
+
 <script>
         const requestUrl = 'createRoom/'
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;

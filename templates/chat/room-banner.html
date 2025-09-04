@@ -1,0 +1,22 @@
+<div id="room-banner" class="flex items-center justify-between p-4 border-b bg-[#ffffff]">
+    <div class="flex items-center gap-3">
+        {% include "chat/icons/user-logo.html" %}
+        <div>
+            <h1 class="font-semibold text-lg" style="color: rgb(35, 35, 35);">
+                John Doe
+            </h1>
+            <p class="text-sm" style="color: rgb(34, 37, 37);">
+            Online
+            </p>
+        </div>
+    </div>
+    <div id="room-banner-buttons" class="flex items-center gap-2">
+        {% include "chat/icons/settings-icon.html" %}
+        <form action="/accounts/logout/" method="post">
+        {% csrf_token %}
+        <button class="flex items-center gap-2 px-3 h-8 rounded-md border text-sm font-medium text-[#F45D48] border-[#F45D48] hover:bg-[#F45D48] hover:text-white hover:cursor-pointer">
+          Logout
+        </button>
+        </form>
+    </div>
+</div>

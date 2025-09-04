@@ -1,9 +1,11 @@
 <!-- chat/templates/chat/index.html -->
 <!DOCTYPE html>
-<html>
+<html class="h-full">
 <head>
     <meta charset="utf-8"/>
     <title>Chat Rooms</title>
+    {% load static %}
+    <link href="{% static "chat/css/output.css" %}" rel="stylesheet">
 </head>
 <body>
     {% if messages %}
@@ -13,36 +15,78 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <h2> Hi {{ user.username }}</h2>
-    <form id="logout-form" method="post" action="{% url 'logout' %}">{% csrf_token %}
-        <button id="logout-button">Logout</button>
-    </form><br/>
 
-    <button id='add-friend-button'>Add Friend</button>
-    <button id='create-group-button'>Create Group</button></br>
-    What chat room would you like to enter?<br>
 
-    <div>
-        {% for room in request.user.rooms.all %}
-            <div> 
-                <div class="room" data-room-id='{{room.id}}'>{{ room.name }}</div>
-            </div>
-        {% endfor %}
+
+<div class="flex h-screen bg-[#f8f5f2]">
+    <div id="chat-selection" class="w-80 border-r flex flex-col bg-[#ffffff]">
+        {% include "chat/room-list-banner.html" %}
+        <div id="room-list" class="flex-1 overflow-y-auto">
+            {% for room in request.user.rooms.all %}
+                <div class="room p-4 border-b cursor-pointer hover:bg-opacity-50 transition-colors bg-opacity-100 hover:bg-[#f8f5f2]" data-room-id='{{room.id}}'>
+                    <div class="flex items-center gap-3">
+                        <div>
+                            {% include "chat/icons/user-logo.html" %}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold truncate"> {{ room.name }}</h3>
+                                <span class="text-xs">21:37 </span>
+                            </div>
+                            <div class="flex items-center justify-between mt-1"> 
+                                <p class="text-sm truncate">Lorem Ipsuum</p> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-    <div id="modal-add-friend">
-        {% include "friends/add-friend.html" %}
+    <div id="chatroom" class="flex-1 flex flex-col">
+        {% include "chat/room.html" %}
     </div>
-    <script>
-        document.querySelectorAll('.room').forEach(roomDiv => {
-            roomDiv.addEventListener('click', () => {
-            const roomId = roomDiv.dataset.roomId;
-            window.location.pathname = '/chat/' + roomId + '/';
-            });
+</div>
+<div id="modal-add-friend" class="hidden">
+    {% include "friends/add-friend.html" %}
+</div>
+<script>
+    document.querySelectorAll('.room').forEach(roomDiv => {
+        roomDiv.addEventListener('click', () => {
+        const roomId = roomDiv.dataset.roomId;
+        window.location.pathname = '/chat/' + roomId + '/';
         });
-        
-    </script>
-    <div id="modal-create-group">
-        {% include "chat/create-group-modal.html" %}
-    </div>
+    });
+</script>
+<div id="modal-add-group" class="hidden">
+    {% include "chat/create-group-modal.html" %}
+</div>
+<script>
+
+        const addFriendModal = document.getElementById("modal-add-friend");
+        const addGroupModal = document.getElementById("modal-add-group");
+
+        const openAddFriendButton = document.getElementById("add-friend-open-modal");
+        const openAddGroupButton = document.getElementById("add-group-open-modal");
+
+        const closeAddFriendButton = document.getElementById("add-friend-close-modal");
+        const closeAddGroupButton = document.getElementById("add-group-close-modal");
+
+            openAddFriendButton.addEventListener("click", () => {
+                addFriendModal.classList.remove("hidden");
+            });
+
+            openAddGroupButton.addEventListener("click", () => {
+                addGroupModal.classList.remove("hidden");
+            });
+
+            closeAddFriendButton.addEventListener("click", () => {
+                addFriendModal.classList.add("hidden");
+            });
+
+            closeAddGroupButton.addEventListener("click", () => {
+                addGroupModal.classList.add("hidden");
+            });
+
+</script>
 </body>
 </html>

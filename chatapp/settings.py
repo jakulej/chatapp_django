@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'daphne',
     'django.contrib.staticfiles',
     'channels',
+    'widget_tweaks',
     'chat',
     'accounts',
     'friends',
