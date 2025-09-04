@@ -8,8 +8,8 @@
 
 <div class="p-4 border-t bg-[#ffffff]">
     <div class="flex items-center gap-2">
-        <input id="chat-message-input" type="text" class="file:text-foreground bg-[#f8f5f2] placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex-1 border" placeholder="type a message...">
-        <button id="chat-message-submit" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 size-9 bg-[#078080]">
+        <input id="chat-message-input" type="text" class="w-full flex-1 h-9 rounded-md border px-3 py-1 text-sm outline-none bg-[#f8f5f2] focus:ring-2 focus:ring-primary" placeholder="type a message...">
+        <button id="chat-message-submit" class="flex items-center justify-center rounded-md text-sm font-medium bg-[#078080] text-white hover:bg-[#066666] h-9 w-9 disabled:opacity-50">
             {% include "chat/icons/send-icon.html" %}
         </button>
     </div>
