@@ -1,5 +1,6 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from .models import Message, Room
+from django.db.models import Max
 from django.contrib.auth.decorators import login_required
 from .room_managment import create_room_obj
 from django.http import HttpResponse
@@ -9,22 +10,19 @@ import json
 
 
 @login_required
-def index(request, room_id):
-    room = Room.objects.get(id=room_id)
-    latest_messages = room.messages.order_by("timestamp")[:10]
-    return render(request, "chat/index.html", {
-        "room_id": room_id,
-        "latest_messages": latest_messages
-        })
+def index(request):
+    room_url = "/chat/"+"4"
+    return redirect(room_url)
 
 
 @login_required
 def room(request, room_id):
     room = Room.objects.get(id=room_id)
     latest_messages = room.messages.order_by("timestamp")[:10]
-    return render(request, "chat/room.html", {
+    return render(request, "chat/index.html", {
         "room_id": room_id,
-        "latest_messages": latest_messages
+        "latest_messages": latest_messages,
+        "sorted_rooms": sort_rooms_latest_message(request.user)
         })
 
 
@@ -40,3 +38,11 @@ def create_room(request):
         create_room_obj(users, "Group")
         print(users)
     return HttpResponse(status=200)
+
+
+def sort_rooms_latest_message(user):
+    rooms = user.rooms.annotate(
+            last_message=Max('messages__timestamp')
+        ).order_by('-last_message')
+    return rooms
+
