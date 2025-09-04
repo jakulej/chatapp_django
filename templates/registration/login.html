@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8"/>
     <title>Login</title>
+    {% load static %}
+    <link href="{% static "chat/css/output.css" %}" rel="stylesheet">
 </head>
 <body>
     {% if messages %}
@@ -13,12 +15,38 @@
         {% endfor %}
     </ul>
     {% endif %}
+    <div class="min-h-screen flex items-center justify-center p-4 bg-[#f8f5f2]">
+        <div class="bg-card text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm w-full max-w-md border bg-[#ffffff]">
 
-    <form id="loginForm" method="post">
-        {% csrf_token %}
-        {{ form }}
+            <!-- Card Header -->
+            <div class="grid auto-rows-min grid-rows-[auto_auto] items-start justify-center gap-1.5 px-6">
+                <h2 class="text-2xl font-bold"> Welcome Back </h2>
+                <p class= "text-muted-foreground text-sm"> Sign to your account to continue </p>
+            </div>
 
-        <button id="loginButton">Login</button>
-    </form>
+            <div class="px-6">
+                {% load widget_tweaks %}
+                <form id="loginForm" class="space-y-4" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="space-y-2">
+                            <label for="{{ field.id_for_label }}"class="flex items-center gap-2 text-sm leading-none font-medium select-none">
+                                {{ field.label }}
+                            </label>
+                            {{ field|add_class:"w-full h-9 rounded-md border px-3 py-1 text-sm bg-[#f8f5f2] focus:border-[#078080] focus:ring focus:ring-[#078080] outline-none" }}
+                        </div>
+                    {% endfor %}
+
+                    <button id="loginButton" class="w-full h-9 px-4 py-2 rounded-md bg-[#078080] text-white font-semibold text-sm shadow hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400 disabled:opacity-50 disabled:pointer-events-none" >Login</button>
+                </form>
+                    <div class="mt-6 text-center">
+                        <p class="text-sm" style="color: rgb(34, 37, 37);">Don't have an account? 
+                            <a href="/accounts/register" class="font-semibold hover:underline text-[#078080]" >Sign up</a>
+                        </p>
+                    </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>
