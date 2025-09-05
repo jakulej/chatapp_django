@@ -14,7 +14,7 @@
         </button>
     </div>
 </div>
-{{ room_id|json_script:"room-id" }}
+{{ current_room.id|json_script:"room-id" }}
    <script>
     const roomId = JSON.parse(document.getElementById('room-id').textContent);
     const chatSocket = new WebSocket(
