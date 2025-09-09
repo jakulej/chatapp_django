@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Message, Room
-from django.db.models import Max
+from django.db.models import Max, Field
 from django.contrib.auth.decorators import login_required
 from .room_managment import create_room_obj
 from django.http import HttpResponse
@@ -18,6 +18,7 @@ def index(request):
 @login_required
 def room(request, room_id):
     room = Room.objects.get(id=room_id)
+    room.name = set_room_name(room, request.user)
     latest_messages = room.messages.order_by("timestamp")[:10]
     return render(request, "chat/index.html", {
         "current_room": room,
@@ -51,6 +52,7 @@ def sort_rooms_latest_message(user):
         if last_message:
             last_message.content = cut_text(last_message.content, 10)
         room.last_message = last_message
+        room.name = set_room_name(room, user)
     return rooms
 
 
@@ -59,3 +61,11 @@ def cut_text(text, max_lenght):
     if len(text) > max_lenght:
         shorted = shorted + "..."
     return shorted
+
+
+def set_room_name(room, current_user):
+    name = room.name
+    if room.name is None:
+        usernames = room.users.all().exclude(id=current_user.id).values_list("username", flat=True)
+        name = ", ".join(usernames)
+    return name
