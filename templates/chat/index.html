@@ -23,22 +23,7 @@
         {% include "chat/room-list-banner.html" %}
         <div id="room-list" class="flex-1 overflow-y-auto">
             {% for room in sorted_rooms %}
-                <div class="room p-4 border-b cursor-pointer hover:bg-opacity-50 transition-colors bg-opacity-100 hover:bg-[#f8f5f2]" data-room-id='{{room.id}}'>
-                    <div class="flex items-center gap-3">
-                        <div>
-                            {% include "chat/icons/user-logo.html" %}
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center justify-between">
-                                <h3 class="font-semibold truncate"> {{ room.name }}</h3>
-                                <span class="text-xs">21:37 </span>
-                            </div>
-                            <div class="flex items-center justify-between mt-1"> 
-                                <p class="text-sm truncate">Lorem Ipsuum</p> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% include "chat/room-list-item.html" %}
             {% endfor %}
         </div>
     </div>

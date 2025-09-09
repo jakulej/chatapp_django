@@ -44,8 +44,18 @@ def create_room(request):
 
 
 def sort_rooms_latest_message(user):
-    rooms = user.rooms.annotate(
-            last_message=Max('messages__timestamp')
-        ).order_by('-last_message')
+    rooms = user.rooms.all()
+
+    for room in rooms:
+        last_message = room.messages.order_by('-timestamp').first()
+        if last_message:
+            last_message.content = cut_text(last_message.content, 10)
+        room.last_message = last_message
     return rooms
 
+
+def cut_text(text, max_lenght):
+    shorted = text[:max_lenght]
+    if len(text) > max_lenght:
+        shorted = shorted + "..."
+    return shorted
