@@ -64,7 +64,7 @@
 
 
 <script>
-        const requestUrl = 'createRoom/'
+    const requestUrl = '{% url 'chat:createRoom' %}'
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         document.getElementById('modal-create-group-button-submit').addEventListener('click' , async function(e) {
             const checked = document.querySelectorAll('.modal-create-group-friend-record-checbox:checked');
