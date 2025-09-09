@@ -5,9 +5,9 @@
       <div class="absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white bg-[#f45d48]"></div>
     </div>
     <div>
-      <p class="font-medium text-[#232323]">John Doe</p>
+        <p class="font-medium text-[#232323]">{{ username }}</p>
       <!-- <p class="text-xs text-[#222525]">Online</p> -->
     </div>
   </div>
-  <button class="h-8 rounded-md px-3 text-sm font-medium bg-[#078080] text-[#232323] hover:bg-primary/90 hover:cursor-pointer">Add Friend</button>
+  <button  data-username="{{ username }}" class=" button-add-friend-record h-8 rounded-md px-3 text-sm font-medium bg-[#078080] text-[#232323] hover:bg-primary/90 hover:cursor-pointer">Add Friend</button>
 </div>

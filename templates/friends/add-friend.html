@@ -12,14 +12,14 @@
     </div>
 </div>
 -->
-<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-in fade-in duration-200">
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-in fade-in duration-200">
   <div class="bg-white flex flex-col gap-2 rounded-xl py-6 shadow-sm w-full max-w-lg border border-[#232323] animate-in zoom-in-95 duration-200">
     
     <!-- Header -->
     <div class="p-6 border-b border-[#232323]">
       <div class="flex items-center justify-between mb-4">
         <h3 class="text-lg font-semibold text-[#232323]">Add Friend</h3>
-        <button id="add-friend-close-modal" class="flex items-center justify-center rounded-md text-[#232323] hover:bg-[#078080] hover:cursor-pointer">
+        <button id="add-friend-close-modal" class="flex items-center justify-center rounded-md text-[#232323] hover:cursor-pointer">
             {% include "chat/icons/close-icon.html" %}
         </button>
       </div>
@@ -40,12 +40,13 @@
         <!-- Search -->
         <div class="relative">
             {% include "chat/icons/maginfire-icon.html" %}
-            <input class="w-full h-9 rounded-md border border-[#232323] px-3 pl-10 text-base md:text-sm outline-none bg-[#f8f5f2] text-[#222525]" placeholder="Search friends...">
+            <input id="input-find-friend" class="w-full h-9 rounded-md border border-[#232323] px-3 pl-10 text-base md:text-sm outline-none bg-[#f8f5f2] text-[#222525]" placeholder="Search friends...">
         </div>
 
         <!-- Friend Card -->
-        {% include "friends/add-friend-record.html" %}
-        
+        {% for friend in friends_results %}
+            {% include "friends/add-friend-record.html"  with username=friend.username %}
+        {% endfor %}
       </div>
     </div>
 
@@ -53,31 +54,46 @@
 </div>
 
 <script>
-    document.getElementById("button-find-friend").addEventListener('click' , async function(e) {
-        const query = document.getElementById("input-find-friend").value;
-        const requestUrl = "/friends/find/" + query;
-        const modalAddFriend = document.getElementById("modal-add-friend");
+    addButtonEvents()
+    function addButtonEvents() {
+        document.getElementById("input-find-friend").addEventListener('change' , async function(e) {
+            const query = document.getElementById("input-find-friend").value;
+            const requestUrl = "/friends/find/" + query;
+            const modalAddFriend = document.getElementById("modal-add-friend");
+            
+            try {
+                const response = await fetch(requestUrl);
+
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+                else {
+                    const html = await response.text();
+                    modalAddFriend.innerHTML = html;
+                    addFriendEvent();
+                    addButtonEvents()
+                }
+
+            } catch (error) {
+                console.error(error.message);
+            }
+        });
+
+        const addFriendModal = document.getElementById("modal-add-friend");
+        const openAddFriendButton = document.getElementById("add-friend-open-modal");
+        const closeAddFriendButton = document.getElementById("add-friend-close-modal");
+
+        openAddFriendButton.addEventListener("click", () => {
+            addFriendModal.classList.remove("hidden");
+        });
         
-        try {
-            const response = await fetch(requestUrl);
-
-            if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
-            }
-            else {
-                const html = await response.text();
-                modalAddFriend.innerHTML = html;
-                addEvent();
-            }
-
-        } catch (error) {
-            console.error(error.message);
-        }
+        closeAddFriendButton.addEventListener("click", () => {
+            addFriendModal.classList.add("hidden");
+        });
     }
-    );
-    
 
-    function addEvent() {
+
+    function addFriendEvent() {
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         document
             .querySelectorAll('.button-add-friend-record')
@@ -102,6 +118,7 @@
                 });
         });
     }
+    
 
 
 </script>

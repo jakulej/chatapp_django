@@ -20,7 +20,7 @@ def room(request, room_id):
     room = Room.objects.get(id=room_id)
     latest_messages = room.messages.order_by("timestamp")[:10]
     return render(request, "chat/index.html", {
-        "room_id": room_id,
+        "current_room": room,
         "latest_messages": latest_messages,
         "sorted_rooms": sort_rooms_latest_message(request.user)
         })
