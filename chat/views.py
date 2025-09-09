@@ -31,11 +31,14 @@ def create_room(request):
     if request.method == 'POST':
         User = get_user_model()
         room_creator = request.user
-        users = json.loads(request.body.decode('utf-8'))['users']
+
+        data = json.loads(request.body.decode('utf-8'))
+        users = data['users']
+        group_name = data['group_name']
         users = list(map(lambda user: User.objects.get(username=user), users))
         users.append(room_creator)
 
-        create_room_obj(users, "Group")
+        create_room_obj(users, group_name)
         print(users)
     return HttpResponse(status=200)
 
