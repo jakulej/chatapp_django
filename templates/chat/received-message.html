@@ -1,16 +1,11 @@
 <div class="flex justify-start">
     <div class="flex items-end gap-2 max-w-xs lg:max-w-md">
-        <span data-slot="avatar" class="relative flex size-8 shrink-0 overflow-hidden rounded-full h-8 w-8">
-            <span data-slot="avatar-fallback" class="bg-muted flex size-full items-center justify-center rounded-full text-sm font-semibold" style="background-color: rgb(244, 93, 72); color: rgb(255, 255, 255);">
-                JD
-            </span>
-        </span>
-        <div data-slot="card" class="bg-card text-card-foreground flex flex-col gap-6 rounded-xl shadow-sm p-3 border" style="background-color: rgb(255, 255, 255); color: rgb(34, 37, 37); border-color: rgb(35, 35, 35);">
+        {% include "chat/icons/user-logo.html" with username=message.sender.username %}
+        <div class="bg-card text-card-foreground flex flex-col gap-4 rounded-xl shadow-sm p-3 border" style="background-color: rgb(255, 255, 255); color: rgb(34, 37, 37); border-color: rgb(35, 35, 35);">
             <p class="text-sm leading-relaxed">
             {{message.content}}
             </p>
-            <p class="text-xs mt-1 opacity-70" style="color: rgb(34, 37, 37);">10:30 AM
-            </p>
+            <p class="text-xs mt-1 opacity-70" style="color: rgb(34, 37, 37);">{{message.timestamp}}</p>
         </div>
     </div>
 </div>

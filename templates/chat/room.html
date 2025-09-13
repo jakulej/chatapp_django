@@ -1,8 +1,12 @@
 {% include "chat/room-banner.html" %}
 
-<div id="chat-log" class="flex-1 overflow-y-auto p-4 space-y-4 bg-[#f8f5f2]">    
+<div id="chat-log" class="flex-1 flex-col overflow-y-auto p-4 space-y-4 bg-[#f8f5f2]">    
     {% for message in latest_messages %}
-        {% include "chat/received-message.html" %}        
+        {% if message.sender != request.user %}
+            {% include "chat/received-message.html" with message=message %}
+        {% else %}
+            {% include "chat/send-message.html" with message=message %}
+        {% endif %}
     {% endfor %}
 </div>
 
