@@ -1,4 +1,4 @@
-<div class="room p-4 border-b cursor-pointer hover:bg-opacity-50 transition-colors bg-opacity-100 hover:bg-[#f8f5f2]" data-room-id='{{room.id}}'>
+<div class="room-list-item room p-4 border-b cursor-pointer hover:bg-opacity-50 transition-colors bg-opacity-100 hover:bg-[#f8f5f2]" data-room-id='{{room.id}}' data-room-name='{{room.name}}'>
     <div class="flex items-center gap-3">
         <div>
             {% include "chat/icons/user-logo.html" with username=room.name  %}
