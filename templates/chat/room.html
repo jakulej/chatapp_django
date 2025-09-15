@@ -28,22 +28,29 @@
         + roomId
         + '/'
     );
-    function addMessage(author, message){
-        var messageDiv = document.createElement('div');
-        var chatLog = document.getElementById('chat-log');
-        var messageContent = document.createElement('div');
-        var messageAuthor = document.createElement('h3');
+    function addMessage(message){
+        var messageHtml = "";
 
-        messageContent.textContent = message;
-        messageAuthor.textContent = author;
-        
-        chatLog.appendChild(messageDiv);
-        messageDiv.appendChild(messageAuthor);
-        messageDiv.appendChild(messageContent);
+        if (message.author == "{{ request.user }}"){
+            messageHtml = createSendMessageElement(message);
+        }else{
+            messageHtml = createReceivedMessage(message);
+        }
+
+        const chatLog = document.getElementById("chat-log");
+        chatLog.appendChild(messageHtml);
     }
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
-        addMessage(data.user, data.message)
+
+
+
+        const message = {
+            content: data.message,
+            author: data.user,
+            timestamp: getCurrentTime()
+        };
+        addMessage(message)
     };
 
     chatSocket.onclose = function(e) {
@@ -66,4 +73,74 @@
         }));
         messageInputDom.value = '';
     };
+
+    function getCurrentTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');   // np. "09"
+        const minutes = String(now.getMinutes()).padStart(2, '0'); // np. "05"
+        return `${hours}:${minutes}`;
+    }
+    function createSendMessageElement(message) {
+        const outerDiv = document.createElement("div");
+        outerDiv.className = "flex justify-end";
+
+        const innerDiv = document.createElement("div");
+        innerDiv.className = "flex flex-col gap-4 rounded-rglg border p-3 shadow-sm text-gray-800 border-gray-800 bg-[#078080]";
+
+        const contentP = document.createElement("p");
+        contentP.className = "text-sm";
+        contentP.textContent = message.content;
+
+        const timeP = document.createElement("p");
+        timeP.className = "text-xs opacity-70";
+        timeP.textContent = message.timestamp;
+
+        innerDiv.appendChild(contentP);
+        innerDiv.appendChild(timeP);
+        outerDiv.appendChild(innerDiv);
+
+        return outerDiv;
+    }
+
+    function createReceivedMessageElement(message) {
+        const outerDiv = document.createElement("div");
+        outerDiv.className = "flex justify-start";
+
+        const innerDiv = document.createElement("div");
+        innerDiv.className = "bg-card text-card-foreground flex flex-col gap-4 rounded-xl shadow-sm p-3 border bg-white text-[rgb(34,37,37)] border-[rgb(35,35,35)]";
+
+        const contentP = document.createElement("p");
+        contentP.className = "text-sm";
+        contentP.textContent = message.content;
+
+        const timeP = document.createElement("p");
+        timeP.className = "text-xs mt-1 opacity-70 text-[rgb(34,37,37)]";
+        timeP.textContent = message.timestamp;
+
+        innerDiv.appendChild(contentP);
+        innerDiv.appendChild(timeP);
+        innerDiv.appendChild(createUserAvatar(message.author))
+        outerDiv.appendChild(innerDiv);
+
+        return outerDiv;
+    }
+
+    function createUserAvatar(username) {
+        // główny span
+        const outerSpan = document.createElement("span");
+        outerSpan.className = "relative flex size-8 shrink-0 overflow-hidden rounded-full h-10 w-10";
+
+        // wewnętrzny span
+        const innerSpan = document.createElement("span");
+        innerSpan.className = "bg-[rgb(7,128,128)] text-[rgb(35,35,35)] flex size-full items-center justify-center rounded-full font-semibold";
+
+        // pierwsza litera username
+        const initial = username.charAt(0).toUpperCase();
+        innerSpan.textContent = initial;
+
+        // składanie
+        outerSpan.appendChild(innerSpan);
+
+        return outerSpan;
+    }
 </script>

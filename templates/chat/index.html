@@ -61,6 +61,22 @@
             addGroupModal.classList.add("hidden");
         });
 
+
+
+document.getElementById("searchRoom").addEventListener("input", function () {
+    const filter = this.value.toLowerCase();
+    const items = document.querySelectorAll("#room-list .room-list-item");
+
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(filter)) {
+            item.style.display = ""; // pokazuj
+        } else {
+            item.style.display = "none"; // ukryj
+        }
+    });
+});
+
 </script>
 </body>
 </html>

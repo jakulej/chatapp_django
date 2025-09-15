@@ -1,7 +1,7 @@
 <div class="flex justify-start">
     <div class="flex items-end gap-2 max-w-xs lg:max-w-md">
         {% include "chat/icons/user-logo.html" with username=message.sender.username %}
-        <div class="bg-card text-card-foreground flex flex-col gap-4 rounded-xl shadow-sm p-3 border" style="background-color: rgb(255, 255, 255); color: rgb(34, 37, 37); border-color: rgb(35, 35, 35);">
+        <div class="bg-card text-card-foreground flex flex-col gap-4 rounded-xl shadow-sm p-3 border bg-white text-[rgb(34,37,37)] border-[rgb(35,35,35)]" >
             <p class="text-sm leading-relaxed">
             {{message.content}}
             </p>
