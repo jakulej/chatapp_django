@@ -6,7 +6,7 @@
         <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between">
                 <h3 class="font-semibold truncate"> {{ room.name }}</h3>
-                <span class="text-xs">21:37 </span>
+                <span class="text-xs">{{ room.last_message.timestamp|time:"H:i"  }}</span>
             </div>
             <div class="flex items-center justify-between mt-1"> 
                 <p class="text-sm truncate">{{ room.last_message.content }}</p> 
