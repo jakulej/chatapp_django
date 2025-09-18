@@ -22,6 +22,6 @@ def add_friend(request, username):
 
         user.friends.add(friend)
         user.save()
-        create_room_obj([user, friend],"temp")
+        create_room_obj([user, friend])
 
     return redirect("/chat/index/")
