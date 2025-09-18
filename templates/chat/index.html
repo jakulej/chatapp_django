@@ -68,11 +68,11 @@ document.getElementById("searchRoom").addEventListener("input", function () {
     const items = document.querySelectorAll("#room-list .room-list-item");
 
     items.forEach(item => {
-        const text = item.textContent.toLowerCase();
+        const text = item.dataset.roomName.toLowerCase();
         if (text.includes(filter)) {
-            item.style.display = ""; // pokazuj
+            item.style.display = ""; //show
         } else {
-            item.style.display = "none"; // ukryj
+            item.style.display = "none"; // hide
         }
     });
 });
