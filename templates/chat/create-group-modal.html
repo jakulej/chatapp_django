@@ -85,6 +85,7 @@
                     throw new Error(`Response status: ${response.status}`);
                 }else {
                     //Message: Room created sucesfully
+                    window.location.href = '/chat/';
                 }
             } catch (error) {
                 console.error(error.message);
