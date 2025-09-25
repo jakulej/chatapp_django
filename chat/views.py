@@ -11,7 +11,8 @@ import json
 
 @login_required
 def index(request):
-    room_url = "/chat/"+"4"
+    latest_room_id = sort_rooms_latest_message(request.user)[0].id
+    room_url = "/chat/"+str(latest_room_id)
     return redirect(room_url)
 
 
