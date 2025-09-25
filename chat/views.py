@@ -19,6 +19,11 @@ def index(request):
 @login_required
 def room(request, room_id):
     room = Room.objects.get(id=room_id)
+    if not room.users.filter(id=request.user.id).exists():
+        latest_room_id = sort_rooms_latest_message(request.user)[0].id
+        room_url = "/chat/"+str(latest_room_id)
+        return redirect(room_url)
+
     room.name = set_room_name(room, request.user)
     latest_messages = room.messages.order_by("timestamp")[:10]
     return render(request, "chat/index.html", {
